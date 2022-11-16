@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
-import { TransactionInterface } from "../models/TransactionsModel";
+import { TransactionInterface } from "../models/TransactionModel";
 import { TransactionRepository } from "../repositories/TransactionRepository";
 import { UserRepository } from "../repositories/UserRepository";
 import { ReturnAPI } from "../resources/ReturnApi";
+import { CashOutService } from "../services/CashOutService";
 
 export class TransactionController {
     public static async cashOut(req: Request, res: Response) {
@@ -22,6 +23,8 @@ export class TransactionController {
             debited_account_id: req.AuthUser?.account_id as string
         }
 
+        const cashOutResponse = await CashOutService.execute(transactionData);
 
+        return ReturnAPI.messageReturn(res,cashOutResponse);
     }
 }

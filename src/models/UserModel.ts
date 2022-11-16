@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { AccountVisibleData } from "./AccountModel";
 
 const prisma = new PrismaClient();
 export const UserModel = prisma.users;

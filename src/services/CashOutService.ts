@@ -1,4 +1,4 @@
-import { TransactionInterface } from "../models/TransactionsModel";
+import { TransactionInterface } from "../models/TransactionModel";
 import { AccountRepository } from "../repositories/AccountRepository";
 import { TransactionRepository } from "../repositories/TransactionRepository";
 import { UserRepository } from "../repositories/UserRepository";
@@ -8,17 +8,17 @@ export class CashOutService {
         const cashOutAccount = await AccountRepository.find(transactionData.debited_account_id);
 
         if (!cashOutAccount) {
-            return
+            return { error: true, message: "usuario não encontrado", developerMessage: "user not found", data: null, statusHTTP: 400 }
         }
 
         if (cashOutAccount?.balance - transactionData.value > 0) {
-            return
+            return { error: true, message: "não é possivel enviar uma transação para si mesmo", developerMessage: "can not do a transaction to yourself", data: null, statusHTTP: 400 }
         }
 
         const cashInAccount = await AccountRepository.find(transactionData.credited_account_id);
 
         if (!cashInAccount) {
-            return
+            return { error: true, message: "usuario não encontrado", developerMessage: "user not found", data: null, statusHTTP: 400 }
         }
 
         const cashOutOldBalance = cashOutAccount.balance;
@@ -28,11 +28,30 @@ export class CashOutService {
         cashInAccount.balance = cashInAccount.balance + transactionData.value;
 
         const updateCashOutResponse = await AccountRepository.update(cashOutAccount);
+
+        if (!updateCashOutResponse) {
+            return { error: true, message: "erro ao realizar transação", developerMessage: "error in cash out", data: null, statusHTTP: 500 }
+        }
+
         const updateCashInResponse = await AccountRepository.update(cashInAccount);
 
-        const newTransaction = TransactionRepository.store(transactionData);
+        if (!updateCashInResponse) {
+            cashOutAccount.balance = cashOutOldBalance;
+            AccountRepository.update(cashOutAccount);
+            return { error: true, message: "erro ao realizar transação", developerMessage: "error in cash in", data: null, statusHTTP: 500 }
+        }
 
-        return 
+        const newTransaction = await TransactionRepository.store(transactionData);
+
+        if (!newTransaction) {
+            cashOutAccount.balance = cashOutOldBalance;
+            AccountRepository.update(cashOutAccount);
+            cashInAccount.balance = cashInOldValue;
+            AccountRepository.update(cashInAccount);
+            return { error: true, message: "erro ao realizar transação", developerMessage: "error in make transaction", data: null, statusHTTP: 500 }
+        }
+
+        return {error: false, message: "Tranzação realizada com sucesso", developerMessage: "trasaction created", data: newTransaction, statusHTTP: 201 }
 
 
     }

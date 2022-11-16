@@ -1,8 +1,7 @@
 import { PrismaClient } from "@prisma/client";
-import { AccountVisibleData } from "./AccountModel";
 
 const prisma = new PrismaClient();
-export const UserModel = prisma.transactions;
+export const TransactionModel = prisma.transactions;
 
 export interface TransactionInterface{
     id:string,
@@ -11,7 +10,7 @@ export interface TransactionInterface{
     credited_account_id:string,  
 }
 
-export const transactionVisibleData = {
+export const TransactionVisibleData = {
     id:true,
     value:true,             
     debited_account_id:true, 

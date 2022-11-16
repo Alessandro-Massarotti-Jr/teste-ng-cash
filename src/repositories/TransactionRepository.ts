@@ -1,38 +1,39 @@
 import { PrismaClient } from "@prisma/client";
-import { AccountInterface, AccountVisibleData,AccountModel } from "../models/AccountModel";
-import { TransactionInterface } from "../models/TransactionsModel";
+import { TransactionInterface, TransactionVisibleData,TransactionModel } from "../models/TransactionModel";
 
 const prisma = new PrismaClient();
 
 export class TransactionRepository {
 
-    public static async find(account_id: string) {
-        const account = await AccountModel.findUnique({
+    public static async find(transaction_id: string) {
+        const transaction = await TransactionModel.findUnique({
             where: {
-                id: account_id,
+                id: transaction_id,
             },
-            select: AccountVisibleData
+            select: TransactionVisibleData
         });
 
         async () => { await prisma.$disconnect(); };
 
-        return account;
+        return transaction;
     }
 
     public static async store(transactionData:Omit<TransactionInterface,'id'>) {
 
 
         try{
-            const newAccount = await AccountModel.create({
+            const newTransaction = await TransactionModel.create({
                 data: {
-                    balance:100
+                    value:transactionData.value,
+                    credited_account_id:transactionData.credited_account_id,
+                    debited_account_id:transactionData.debited_account_id
                 },
-                select: AccountVisibleData
+                select: TransactionVisibleData
             });
     
             async () => { await prisma.$disconnect(); };
     
-            return newAccount;
+            return newTransaction;
         }catch(error){
           console.log(error);
           return null
@@ -41,51 +42,53 @@ export class TransactionRepository {
 
     }
 
-    public static async update(account: AccountInterface) {
-        const updatedAccount = await AccountModel.update({
+    public static async update(transactionData: TransactionInterface) {
+        const updatedTransaction = await TransactionModel.update({
             where: {
-                id: account.id
+                id: transactionData.id
             },
             data: {
-                balance:account.balance
+                value:transactionData.value,
+                credited_account_id:transactionData.credited_account_id,
+                debited_account_id:transactionData.debited_account_id
             },
-            select: AccountVisibleData
+            select: TransactionVisibleData
         });
 
         async () => {
             await prisma.$disconnect();
         }
 
-        return updatedAccount;
+        return updatedTransaction;
     }
 
-    public static async delete(account_id: string) {
-        const deletedAccount = await AccountModel.update({
+    public static async delete(transaction_id: string) {
+        const deletedTransaction = await TransactionModel.update({
             where: {
-                id: account_id
+                id: transaction_id
             },
             data: {
                 deleted: true
             },
-            select:AccountVisibleData
+            select:TransactionVisibleData
         });
 
         async () => { await prisma.$disconnect(); };
 
-        return deletedAccount;
+        return deletedTransaction;
     }
 
     public static async findAll() {
-        const accounts = await AccountModel.findMany({
+        const transactions = await TransactionModel.findMany({
             where: {
                 deleted: false
             },
-            select: AccountVisibleData
+            select: TransactionVisibleData
         });
 
         async () => { await prisma.$disconnect(); };
 
-        return accounts;
+        return transactions;
     }
 
 }
