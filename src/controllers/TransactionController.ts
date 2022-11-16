@@ -19,7 +19,7 @@ export class TransactionController {
         
         const transactionData: Omit<TransactionInterface, 'id'> = {
             value: req.body.value,
-            credited_account_id: cashinUser.id,
+            credited_account_id: cashinUser.account_id as string,
             debited_account_id: req.AuthUser?.account_id as string
         }
 

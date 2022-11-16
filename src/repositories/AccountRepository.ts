@@ -14,7 +14,6 @@ export class AccountRepository {
         });
 
         async () => { await prisma.$disconnect(); };
-
         return account;
     }
 
@@ -65,6 +64,19 @@ export class AccountRepository {
             },
             data: {
                 deleted: true
+            },
+            select:AccountVisibleData
+        });
+
+        async () => { await prisma.$disconnect(); };
+
+        return deletedAccount;
+    }
+
+    public static async forceDelete(account_id: string) {
+        const deletedAccount = await AccountModel.delete({
+            where: {
+                id: account_id
             },
             select:AccountVisibleData
         });

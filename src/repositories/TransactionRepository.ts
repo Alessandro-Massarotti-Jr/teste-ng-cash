@@ -78,6 +78,19 @@ export class TransactionRepository {
         return deletedTransaction;
     }
 
+    public static async forceDelete(transaction_id: string) {
+        const TransactionAccount = await TransactionModel.delete({
+            where: {
+                id: transaction_id
+            },
+            select:TransactionVisibleData
+        });
+
+        async () => { await prisma.$disconnect(); };
+
+        return TransactionAccount;
+    }
+
     public static async findAll() {
         const transactions = await TransactionModel.findMany({
             where: {

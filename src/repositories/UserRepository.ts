@@ -28,7 +28,6 @@ export class UserRepository {
         });
 
         async () => { await prisma.$disconnect(); };
-
         return user;
     }
 

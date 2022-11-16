@@ -2,6 +2,15 @@ import { UserInterface } from "../models/UserModel";
 
 export class UserRequest {
     public static validateStore(store_data:Omit<UserInterface,'id'>){
+
+        if(!store_data.username){
+            return { error: true, developerMessage: 'User username is required', message: 'username precisa ser informado', data: null, statusHTTP: 400 }
+        }
+
+        if(!store_data.password){
+            return { error: true, developerMessage: 'User password is required', message: 'senha precisa ser informado', data: null, statusHTTP: 400 }
+        }
+
         if(store_data.username.length < 3){
             return { error: true, developerMessage: 'User username need to have at last 3 caracters', message: 'username precisa ter pelo menos 3 caracteres', data: null, statusHTTP: 400 }
         }
