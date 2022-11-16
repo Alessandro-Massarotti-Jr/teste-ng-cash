@@ -5,5 +5,5 @@ import { TransactionController } from "../controllers/TransactionController";
 
 export const transactionRoutes = express.Router();
 
-
+transactionRoutes.get("/",  TransactionController.index);
 transactionRoutes.post("/",  TransactionController.cashOut);

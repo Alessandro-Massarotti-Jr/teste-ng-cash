@@ -27,4 +27,16 @@ export class TransactionController {
 
         return ReturnAPI.messageReturn(res,cashOutResponse);
     }
+
+    public static async index(req: Request, res: Response){
+      const trasactions = await TransactionRepository.findAll();
+      return ReturnAPI.messageReturn(res,{error:false,message:"transactions",developerMessage:"all transactions",data:trasactions,statusHTTP:200})
+    }
+
+    public static async getTransactions(req: Request, res: Response){
+
+        
+
+    }
+
 }

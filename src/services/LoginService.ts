@@ -20,7 +20,9 @@ export class LoginService {
             return { error: true, message: 'Senha invalida', developerMessage: 'invalid password', data: null, statusHTTP: 400 };
         }
 
-        const jwt_token = jwt.sign(userData, jwt_secret as Secret,{expiresIn:86400})
+        const jwt_data = userData;
+
+        const jwt_token = jwt.sign(jwt_data, jwt_secret as Secret,{expiresIn:86400})
 
         return { error: false, message: 'Login realizado com sucesso', developerMessage: 'login successs', data: { token: jwt_token, user: userData }, statusHTTP: 200 }
 

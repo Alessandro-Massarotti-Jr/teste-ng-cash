@@ -12,6 +12,11 @@ export class UserController {
         return ReturnAPI.messageReturn(res, { error: false, developerMessage: '', message: 'teste', data: users, statusHTTP: 200 })
     }
 
+    public static auth(req: Request, res: Response) {
+        return ReturnAPI.messageReturn(res, { error: false, developerMessage: '', message: 'teste', data: req.AuthUser || null, statusHTTP: 200 })
+    }
+
+
     public static async store(req: Request, res: Response) {
 
         const data = req.body as Omit<UserInterface,'id'>
