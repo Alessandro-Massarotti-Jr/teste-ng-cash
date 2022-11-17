@@ -9,7 +9,7 @@ export class UserController {
 
     public static async index(req: Request, res: Response) {
         const users = await UserRepository.findAll();
-        return ReturnAPI.messageReturn(res, { error: false, developerMessage: '', message: 'teste', data: users, statusHTTP: 200 })
+        return ReturnAPI.messageReturn(res, { error: false, developerMessage: 'Authenticated user', message: 'usuario logado no sistema', data: users, statusHTTP: 200 })
     }
 
     public static auth(req: Request, res: Response) {

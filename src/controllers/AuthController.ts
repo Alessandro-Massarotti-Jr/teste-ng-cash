@@ -9,7 +9,7 @@ export class AuthController {
     public static async login(req: Request, res: Response) {
         const loginData: UserInterface = req.body;
         const loginResult = await LoginService.execute(loginData);
-        res.cookie('access_token', loginResult.data?.token, { httpOnly: true, maxAge: 86400, })
+        res.cookie('access_token', loginResult.data?.token, { httpOnly: true, maxAge: 8640000, })
         return ReturnAPI.messageReturn(res, loginResult);
     }
 

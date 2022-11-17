@@ -1,5 +1,6 @@
 import express from "express"
 import { AuthMiddleware } from "./middlewares/AuthMiddleware";
+import { ReturnAPI } from "./resources/ReturnApi";
 import { accountRoutes } from "./routes/AccountRouter";
 import { authRoutes } from "./routes/AuthRouter";
 import { transactionRoutes } from "./routes/TransactionRouter";
@@ -15,3 +16,7 @@ routes.use("/users",userRoutes);
 routes.use("/auth",authRoutes);
 routes.use("/accounts",AuthMiddleware.Authenticate,accountRoutes);
 routes.use("/transaction",AuthMiddleware.Authenticate,transactionRoutes);
+
+routes.use((req,res)=>{
+    return ReturnAPI.messageReturn(res,{error:true,developerMessage:"Route Not found",message:"Rota não encontrada",data:null,statusHTTP:404});
+})
