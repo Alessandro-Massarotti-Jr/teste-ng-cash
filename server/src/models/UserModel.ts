@@ -3,19 +3,19 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 export const UserModel = prisma.users;
 
-export interface UserInterface{
+export interface UserInterface {
     id: string
     username: string;
     password: string;
-    account_id?:string;
+    account_id?: string;
 }
 
 export const UserVisibleData = {
     id: true,
     username: true,
-    password:true,
-    account_id:true,
-    deleted:true,
-    createdAt:true,
-    updatedAt:true, 
+    password: true,
+    account_id: true,
+    deleted: true,
+    createdAt: true,
+    updatedAt: true,
 }

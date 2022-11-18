@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt"
-import { UserInterface, UserVisibleData,UserModel } from "../models/UserModel";
+import { UserInterface, UserVisibleData, UserModel } from "../models/UserModel";
 
 const prisma = new PrismaClient();
 
@@ -36,22 +36,22 @@ export class UserRepository {
         const salt = await bcrypt.genSalt(12);
         const passwordHash = await bcrypt.hash(user.password, salt);
 
-        try{
+        try {
             const newUser = await UserModel.create({
                 data: {
                     username: user.username,
                     password: passwordHash,
-                    
+
                 },
                 select: UserVisibleData
             });
-    
+
             async () => { await prisma.$disconnect(); };
-    
+
             return newUser;
-        }catch(error){
-          console.log(error);
-          return null
+        } catch (error) {
+            console.log(error);
+            return null
         }
 
 
@@ -65,7 +65,7 @@ export class UserRepository {
             data: {
                 username: user.username,
                 password: user.password,
-                account_id:user.account_id
+                account_id: user.account_id
             },
             select: UserVisibleData
         });
@@ -85,7 +85,7 @@ export class UserRepository {
             data: {
                 deleted: true
             },
-            select:UserVisibleData
+            select: UserVisibleData
         });
 
         async () => { await prisma.$disconnect(); };
@@ -98,7 +98,7 @@ export class UserRepository {
             where: {
                 id: user_id
             },
-            select:UserVisibleData
+            select: UserVisibleData
         });
 
         async () => { await prisma.$disconnect(); };

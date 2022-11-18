@@ -9,9 +9,9 @@ export interface AccountInterface {
 }
 
 export const AccountVisibleData = {
-    id:true,
-    balance:true,
-    deleted:true,
-    createdAt:true,
-    updatedAt:true,
+    id: true,
+    balance: true,
+    deleted: true,
+    createdAt: true,
+    updatedAt: true,
 }

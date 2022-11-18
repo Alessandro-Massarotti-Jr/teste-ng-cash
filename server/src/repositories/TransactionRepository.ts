@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { TransactionInterface, TransactionVisibleData,TransactionModel } from "../models/TransactionModel";
+import { TransactionInterface, TransactionVisibleData, TransactionModel } from "../models/TransactionModel";
 
 const prisma = new PrismaClient();
 
@@ -18,25 +18,25 @@ export class TransactionRepository {
         return transaction;
     }
 
-    public static async store(transactionData:Omit<TransactionInterface,'id'>) {
+    public static async store(transactionData: Omit<TransactionInterface, 'id'>) {
 
 
-        try{
+        try {
             const newTransaction = await TransactionModel.create({
                 data: {
-                    value:transactionData.value,
-                    credited_account_id:transactionData.credited_account_id,
-                    debited_account_id:transactionData.debited_account_id
+                    value: transactionData.value,
+                    credited_account_id: transactionData.credited_account_id,
+                    debited_account_id: transactionData.debited_account_id
                 },
                 select: TransactionVisibleData
             });
-    
+
             async () => { await prisma.$disconnect(); };
-    
+
             return newTransaction;
-        }catch(error){
-          console.log(error);
-          return null
+        } catch (error) {
+            console.log(error);
+            return null
         }
 
 
@@ -48,9 +48,9 @@ export class TransactionRepository {
                 id: transactionData.id
             },
             data: {
-                value:transactionData.value,
-                credited_account_id:transactionData.credited_account_id,
-                debited_account_id:transactionData.debited_account_id
+                value: transactionData.value,
+                credited_account_id: transactionData.credited_account_id,
+                debited_account_id: transactionData.debited_account_id
             },
             select: TransactionVisibleData
         });
@@ -70,7 +70,7 @@ export class TransactionRepository {
             data: {
                 deleted: true
             },
-            select:TransactionVisibleData
+            select: TransactionVisibleData
         });
 
         async () => { await prisma.$disconnect(); };
@@ -83,7 +83,7 @@ export class TransactionRepository {
             where: {
                 id: transaction_id
             },
-            select:TransactionVisibleData
+            select: TransactionVisibleData
         });
 
         async () => { await prisma.$disconnect(); };

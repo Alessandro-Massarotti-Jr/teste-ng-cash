@@ -19,11 +19,11 @@ export class UserController {
 
     public static async store(req: Request, res: Response) {
 
-        const data = req.body as Omit<UserInterface,'id'>
+        const data = req.body as Omit<UserInterface, 'id'>
 
         const validate_data = UserRequest.validateStore(data);
 
-        if(validate_data.error){
+        if (validate_data.error) {
             return ReturnAPI.messageReturn(res, validate_data)
         }
 

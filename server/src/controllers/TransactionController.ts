@@ -5,8 +5,9 @@ import { UserRepository } from "../repositories/UserRepository";
 import { ReturnAPI } from "../resources/ReturnApi";
 import { CashOutService } from "../services/CashOutService";
 import moment from "moment";
+import { TrasactionRequests } from "../requests/TransactionRequest";
 
-interface WhereInterface {
+interface WhereFilterInterface {
     createdAt: {
         gte: Date;
         lte: Date;
@@ -17,7 +18,13 @@ interface WhereInterface {
 
 export class TransactionController {
     public static async cashOut(req: Request, res: Response) {
-        req.AuthUser
+
+        const validateResponse = TrasactionRequests.validateCashOut(req.body);
+
+        if (validateResponse.error) {
+            return ReturnAPI.messageReturn(res, validateResponse);
+        }
+
         const cashinUser = await UserRepository.findbyUsername(req.body.cashInUser);
 
         if (!cashinUser) {
@@ -46,33 +53,37 @@ export class TransactionController {
     public static async getTransactions(req: Request, res: Response) {
 
         const date = {
-            start: moment().subtract(1,'M').toDate(),
-            end: moment().toDate()
+            start: moment().subtract(1, 'M'),
+            end: moment()
         }
 
         if (req.body.date_start) {
-            date.start = moment(req.body.date_start).toDate()
+            date.start = moment(req.body.date_start)
         }
 
         if (req.body.date_end) {
-            date.end = moment(req.body.date_end).toDate()
+            date.end = moment(req.body.date_end)
         }
 
-        const where: WhereInterface = {
+        if (!date.end.isAfter(date.start)) {
+            return ReturnAPI.messageReturn(res, { error: true, message: "data final deve ser maior que a data inicial", developerMessage: "Data start gteater than date end", data: null, statusHTTP: 400 })
+        }
+
+        const whereFilter: WhereFilterInterface = {
             createdAt: {
-                gte: date.start,
-                lte: date.end
+                gte: date.start.toDate(),
+                lte: date.end.toDate()
             }
         }
 
-        if(req.body.cashIn && !req.body.cashOut){
-            where.credited_account_id = req.AuthUser?.account_id;
-        }else if(req.body.cashOut && !req.body.cashIn){
-            where.debited_account_id = req.AuthUser?.account_id
+        if (req.body.cashIn && !req.body.cashOut) {
+            whereFilter.credited_account_id = req.AuthUser?.account_id;
+        } else if (req.body.cashOut && !req.body.cashIn) {
+            whereFilter.debited_account_id = req.AuthUser?.account_id
         }
 
         const transactions = await TransactionModel.findMany({
-            where: where,
+            where: whereFilter,
             select: TransactionVisibleData
         });
 

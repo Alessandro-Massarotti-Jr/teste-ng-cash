@@ -51,7 +51,7 @@ export class CashOutService {
             return { error: true, message: "erro ao realizar transação", developerMessage: "error in make transaction", data: null, statusHTTP: 500 }
         }
 
-        return {error: false, message: "Tranzação realizada com sucesso", developerMessage: "trasaction created", data: newTransaction, statusHTTP: 201 }
+        return { error: false, message: "Tranzação realizada com sucesso", developerMessage: "trasaction created", data: newTransaction, statusHTTP: 201 }
 
 
     }

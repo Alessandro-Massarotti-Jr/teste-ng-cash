@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { AccountInterface, AccountVisibleData,AccountModel } from "../models/AccountModel";
+import { AccountInterface, AccountVisibleData, AccountModel } from "../models/AccountModel";
 
 const prisma = new PrismaClient();
 
@@ -20,20 +20,20 @@ export class AccountRepository {
     public static async store() {
 
 
-        try{
+        try {
             const newAccount = await AccountModel.create({
                 data: {
-                    balance:100
+                    balance: 100
                 },
                 select: AccountVisibleData
             });
-    
+
             async () => { await prisma.$disconnect(); };
-    
+
             return newAccount;
-        }catch(error){
-          console.log(error);
-          return null
+        } catch (error) {
+            console.log(error);
+            return null
         }
 
 
@@ -45,7 +45,7 @@ export class AccountRepository {
                 id: account.id
             },
             data: {
-                balance:account.balance
+                balance: account.balance
             },
             select: AccountVisibleData
         });
@@ -65,7 +65,7 @@ export class AccountRepository {
             data: {
                 deleted: true
             },
-            select:AccountVisibleData
+            select: AccountVisibleData
         });
 
         async () => { await prisma.$disconnect(); };
@@ -78,7 +78,7 @@ export class AccountRepository {
             where: {
                 id: account_id
             },
-            select:AccountVisibleData
+            select: AccountVisibleData
         });
 
         async () => { await prisma.$disconnect(); };

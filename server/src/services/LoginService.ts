@@ -10,8 +10,8 @@ export class LoginService {
 
         const userData = await UserRepository.findbyUsername(loginData.username)
 
-        if(!userData){
-            return {error: true, message: 'Usuario não encontrado ou inexistente', developerMessage: 'User not found', data: null, statusHTTP: 400}
+        if (!userData) {
+            return { error: true, message: 'Usuario não encontrado ou inexistente', developerMessage: 'User not found', data: null, statusHTTP: 400 }
         }
 
         const checkPassword = await bcrypt.compare(loginData.password, userData.password);
@@ -22,7 +22,7 @@ export class LoginService {
 
         const jwt_data = userData;
 
-        const jwt_token = jwt.sign(jwt_data, jwt_secret as Secret,{expiresIn:86400})
+        const jwt_token = jwt.sign(jwt_data, jwt_secret as Secret, { expiresIn: 86400 })
 
         return { error: false, message: 'Login realizado com sucesso', developerMessage: 'login successs', data: { token: jwt_token, user: userData }, statusHTTP: 200 }
 
