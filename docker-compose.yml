@@ -1,17 +1,8 @@
 version: '2.12.2'
 
 services:
-  postgres:
-    container_name: postgres
-    image: postgres
-    restart: always
-    environment:
-      - "POSTGRES_PASSWORD=ng_cash_pass"
-      - "POSTGRES_USER=ng_cash_user"
-      - "POSTGRES_DB=ng_cash_db"
-    ports:
-      - "5432:5432"
-  ng_cash_app:
+ 
+  ng_cash_server:
     container_name: ng_cash_app
     build: .
     depends_on:
