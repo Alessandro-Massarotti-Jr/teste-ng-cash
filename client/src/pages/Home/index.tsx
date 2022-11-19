@@ -2,8 +2,20 @@ import styles from "./styles.module.css"
 import logoNgCashBranco from "../../assets/logo-ngcash-branco.svg"
 import TransactionTable from "../../components/TransactionTable"
 import { Icon } from '@iconify/react';
+import { AuthService } from "../../services/AuthService";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+
+    const navigate = useNavigate();
+
+    function handleLogout(){
+        AuthService.logout().then(response =>
+            navigate('/login',{replace:true})
+
+        )
+    }
+
     return (
         <div className={styles.home}>
             <div className={styles.infoContainer}>
@@ -13,7 +25,7 @@ export default function Home() {
                     </div>
                     <div className={styles.header__info}>
                         <h1 className={styles.header__title}>Transações</h1>
-                        <span className={styles.header__logout}>Logout</span>
+                        <span onClick={handleLogout} className={styles.header__logout}>Logout</span>
                     </div>
 
                 </header>

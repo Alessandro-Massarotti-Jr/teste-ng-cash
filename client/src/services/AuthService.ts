@@ -11,6 +11,8 @@ export class AuthService {
             password: userData.password
         }).then(response => {
 
+            localStorage.setItem('access_token',response.data.data.token);
+
             toast.success(response.data.message, {
                 position: "top-right",
                 autoClose: 5000,

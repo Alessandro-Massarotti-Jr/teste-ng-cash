@@ -9,8 +9,11 @@ export interface UserDataInterface {
 export class UserService {
 
     public static async authUser() {
-        api.get('/users/auth-user').then(response => {
 
+        let authUser = false;
+
+        await api.get('/users/auth-user').then(response => {
+            authUser = true;
             toast.success(response.data.message, {
                 position: "top-right",
                 autoClose: 5000,
@@ -24,6 +27,8 @@ export class UserService {
 
         }).catch(error => {
 
+            authUser = false;
+
             toast.error(error.response.data.message, {
                 position: "top-right",
                 autoClose: 5000,
@@ -36,6 +41,8 @@ export class UserService {
             });
 
         });
+
+        return authUser;
 
     }
     public static async store(userData: UserDataInterface) {

@@ -13,7 +13,7 @@ export class UserController {
     }
 
     public static auth(req: Request, res: Response) {
-        return ReturnAPI.messageReturn(res, { error: false, developerMessage: '', message: 'teste', data: req.AuthUser || null, statusHTTP: 200 })
+        return ReturnAPI.messageReturn(res, { error: false, developerMessage: 'auth', message:'Usuario esta autenticado', data: req.AuthUser || null, statusHTTP: 200 })
     }
 
 
