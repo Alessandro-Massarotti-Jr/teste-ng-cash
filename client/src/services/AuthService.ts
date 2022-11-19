@@ -34,13 +34,13 @@ export class AuthService {
                 progress: undefined,
                 theme: "dark",
             });
-            return error
+        
         });
 
     }
 
     public static async logout() {
-        const response = api.get('/auth/logout').then(response => {
+        api.get('/auth/logout').then(response => {
 
             toast.success(response.data.message, {
                 position: "top-right",
@@ -65,7 +65,7 @@ export class AuthService {
                 progress: undefined,
                 theme: "dark",
             });
-            return error
+     
         });
 
     }
