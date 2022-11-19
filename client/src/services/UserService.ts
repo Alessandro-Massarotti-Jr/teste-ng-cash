@@ -13,7 +13,7 @@ export class UserService {
         let authUser = false;
 
         await api.get('/users/auth-user').then(response => {
-            authUser = true;
+            authUser = response.data.data;
             toast.success(response.data.message, {
                 position: "top-right",
                 autoClose: 5000,
@@ -41,7 +41,7 @@ export class UserService {
             });
 
         });
-
+console.log(authUser)
         return authUser;
 
     }
