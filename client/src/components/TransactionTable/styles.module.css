@@ -1,0 +1,33 @@
+.filterForm{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.transactionTable{
+    border: 4px solid var(--main-color);
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow-x: scroll;
+}
+
+.transactionTable thead tr {
+    background-color: var(--main-color);
+    color: var(--main-background);
+    text-align: left;
+}
+
+.transactionTablee th,
+.transactionTable td {
+    padding: 12px 4px;
+}
+
+.transactionTable tbody tr{
+    border-bottom: 1px solid var(--main-color);
+}
+
+.transactionTable tbody tr td{
+    border: 1px solid var(--main-color);
+}
+

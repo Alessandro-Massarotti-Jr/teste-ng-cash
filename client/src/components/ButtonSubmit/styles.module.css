@@ -1,0 +1,15 @@
+.buttonSubmit {
+    border: 2px solid #232323;
+    background-color: var(--main-color);
+    color: #232323;
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin: 5px auto;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+}
+
+.buttonSubmit:hover {
+    background-color: #232323;
+    color: var(--main-color);
+}

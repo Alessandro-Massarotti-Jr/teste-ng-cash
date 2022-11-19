@@ -1,0 +1,16 @@
+.registerForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.registerForm__registerLink{
+    color: #b9b9b9;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: 0.3s ease-in-out;
+}
+
+.registerForm__registerLink:hover{
+    color: #757474;
+}
