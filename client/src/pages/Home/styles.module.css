@@ -62,3 +62,20 @@ font-size: 16px;
 .infoContainer__separator{
     margin: 16px 0;;
 }
+
+.header__info{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.header__logout{
+    color: #b9b9b9;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: 0.3s ease-in-out;
+}
+
+.header__logout:hover{
+    color: #757474;
+}

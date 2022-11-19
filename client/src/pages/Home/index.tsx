@@ -11,7 +11,11 @@ export default function Home() {
                     <div className={styles.header__logo}>
                         <img src={logoNgCashBranco} alt="Logo ng cash" />
                     </div>
-                    <h1 className={styles.header__title}>Transações</h1>
+                    <div className={styles.header__info}>
+                        <h1 className={styles.header__title}>Transações</h1>
+                        <span className={styles.header__logout}>Logout</span>
+                    </div>
+
                 </header>
                 <div className={styles.infoContainer__userData}>
                     <div className={styles.userData__userInfo}>
@@ -23,7 +27,7 @@ export default function Home() {
                         <span className={styles.accountInfo__description}>Saldo atual</span>
                     </div>
                 </div>
-                <hr className={styles.infoContainer__separator}/>
+                <hr className={styles.infoContainer__separator} />
                 <TransactionTable />
             </div>
         </div>

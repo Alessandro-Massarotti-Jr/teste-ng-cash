@@ -4,6 +4,7 @@
   --body-background: #242424;
   --main-background: #020202;
   --main-color:#f2f2f2;
+
 }
 
 * {
@@ -21,4 +22,29 @@ body {
   background-color: var(--body-background);
   color: var(--main-color);
   min-height: 100vh;
+}
+
+.toast{
+  position: fixed;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #020202;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #f2f2f2;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #a7a7a7;
 }

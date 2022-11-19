@@ -1,4 +1,5 @@
 import api from "./api";
+import { toast } from 'react-toastify'
 
 export interface cashOutInterface {
     cashInUser: string;
@@ -15,12 +16,64 @@ export interface filterInterface {
 export class TransactionService {
 
     public static async filter(filterData:filterInterface) {
-        const response = await api.post('/transaction/filter',filterData);
-        return response.data.data;
+       api.post('/transaction/filter',filterData).then(response => {
+
+        toast.success(response.data.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+
+    }).catch(error => {
+
+        toast.error(error.response.data.message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+
+    });
+   
     }
     public static async cashOut(cashOutData: cashOutInterface) {
-        const response = await api.post('/users', cashOutData);
-        return response.data.data;
+        api.post('/users', cashOutData).then(response => {
+
+            toast.success(response.data.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+
+        }).catch(error => {
+
+            toast.error(error.response.data.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+
+        });
+       
     }
 
 }
