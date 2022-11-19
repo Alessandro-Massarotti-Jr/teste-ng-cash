@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 export class AccountService{
 
    public static async authUserAccount(){
-      api.get('/accounts').then(response => {
+      await api.get('/accounts').then(response => {
 
          toast.success(response.data.message, {
              position: "top-right",

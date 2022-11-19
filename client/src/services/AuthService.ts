@@ -6,7 +6,7 @@ export class AuthService {
 
     public static async login(userData: UserDataInterface) {
 
-        api.post('/auth/login', {
+       await api.post('/auth/login', {
             username: userData.username,
             password: userData.password
         }).then(response => {
@@ -42,7 +42,7 @@ export class AuthService {
     }
 
     public static async logout() {
-        api.get('/auth/logout').then(response => {
+        await api.get('/auth/logout').then(response => {
 
             toast.success(response.data.message, {
                 position: "top-right",

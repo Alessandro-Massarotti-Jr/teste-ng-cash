@@ -16,7 +16,7 @@ export interface filterInterface {
 export class TransactionService {
 
     public static async filter(filterData:filterInterface) {
-       api.post('/transaction/filter',filterData).then(response => {
+       await api.post('/transaction/filter',filterData).then(response => {
 
         toast.success(response.data.message, {
             position: "top-right",
@@ -46,7 +46,7 @@ export class TransactionService {
    
     }
     public static async cashOut(cashOutData: cashOutInterface) {
-        api.post('/users', cashOutData).then(response => {
+       await api.post('/users', cashOutData).then(response => {
 
             toast.success(response.data.message, {
                 position: "top-right",

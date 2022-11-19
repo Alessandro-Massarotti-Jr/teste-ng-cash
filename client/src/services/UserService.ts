@@ -46,7 +46,7 @@ export class UserService {
 
     }
     public static async store(userData: UserDataInterface) {
-        api.post('/users', userData).then(response => {
+      await  api.post('/users', userData).then(response => {
 
             toast.success(response.data.message, {
                 position: "top-right",

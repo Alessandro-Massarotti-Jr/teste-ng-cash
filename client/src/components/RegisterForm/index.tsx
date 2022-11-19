@@ -1,5 +1,5 @@
 import { FormEvent, useRef, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { UserService } from "../../services/UserService"
 import ButtonSubmit from "../ButtonSubmit"
 import InputText from "../Form/InputText"
@@ -10,6 +10,7 @@ export default function RegisterForm() {
 
     const usernameRef = useRef('');
     const passwordRef = useRef('');
+    const navigate = useNavigate();
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -19,8 +20,10 @@ export default function RegisterForm() {
         UserService.store({
             username: usernameRef.current.value,
             password: passwordRef.current.value
-        }).then(response =>
+        }).then((response) => {
             setIsLoading(false)
+            navigate('/login',{replace:true})
+        }
         );
 
     }
