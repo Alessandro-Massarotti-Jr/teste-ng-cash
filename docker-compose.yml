@@ -6,14 +6,15 @@ services:
     container_name: ng_cash_server
     build: ./server
     restart: always
-    command: npm start
+    command: npm run dev
     ports:
       - "3333:3333"
     volumes:
       - .:/ng_cash_server
     environment:
-      - DATABASE_URL="ng_cash_user:ng_cash_pass@postgres:5432/ng_cash_db"
+      - DATABASE_URL="postgresql://ng_cash_user:ng_cash_pass@localhost:5432/ng_cash_db?schema=public"
       - PORT=3333
+      - JWT_SECRET="azzsdgdsgsgregea"
 
   ng_cash_client:
     container_name: ng_cash_client
