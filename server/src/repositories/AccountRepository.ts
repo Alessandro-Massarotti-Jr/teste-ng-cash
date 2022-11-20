@@ -45,7 +45,7 @@ export class AccountRepository {
                 id: account.id
             },
             data: {
-                balance: account.balance
+                balance: Number(account.balance)
             },
             select: AccountVisibleData
         });

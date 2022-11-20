@@ -6,11 +6,17 @@ export interface UserDataInterface {
     password: string;
 }
 
+export interface AuthUserInterface{
+    id?:string;
+    username?: string;
+    password?: string;
+}
+
 export class UserService {
 
     public static async authUser() {
 
-        let authUser = false;
+        let authUser: AuthUserInterface | null = {};
 
         await api.get('/users/auth-user').then(response => {
             authUser = response.data.data;
@@ -27,7 +33,7 @@ export class UserService {
 
         }).catch(error => {
 
-            authUser = false;
+            authUser = null;
 
             toast.error(error.response.data.message, {
                 position: "top-right",
@@ -41,7 +47,6 @@ export class UserService {
             });
 
         });
-console.log(authUser)
         return authUser;
 
     }

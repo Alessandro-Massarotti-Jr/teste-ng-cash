@@ -1,16 +1,15 @@
 FROM node:16
 
-ENV DATABASE_URL="postgresql://ng_cash_user:ng_cash_pass@postgres:5432/ng_cash_db"
-ENV PORT=3333
+ENV VITE_API_URL='http://127.0.0.1:3333'
 
-WORKDIR /ng_cash_app
+WORKDIR /ng_cash_client
 
 COPY package.json ./
 
 COPY ./ ./
 
-RUN npm install && npm run build 
+RUN npm install
 
 EXPOSE 3000
 
-CMD ["npm","start"]
+CMD ["npm","run dev"]

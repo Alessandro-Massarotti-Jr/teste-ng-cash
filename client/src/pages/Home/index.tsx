@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { UserDataInterface, UserService } from "../../services/UserService";
 import Loading from "../../components/Loading";
 import { AccountService, authUserAccountInterface } from "../../services/AccountService";
+import CashOutModal from "../../components/CashOutModal";
 
 export default function Home() {
 
@@ -29,7 +30,7 @@ export default function Home() {
 
     async function getAuthUser() {
         const user = await UserService.authUser();
-        setAuthUser(user)
+        setAuthUser(user as Omit<UserDataInterface, 'password'>)
     }
 
     async function getAuthUserAccount() {
@@ -72,6 +73,8 @@ export default function Home() {
                             <span className={styles.accountInfo__description}>Saldo atual</span>
                         </div>
                     </div>
+                    <hr className={styles.infoContainer__separator} />
+                    <CashOutModal/>
                     <hr className={styles.infoContainer__separator} />
                     <TransactionTable />
                 </div>}

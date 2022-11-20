@@ -31,3 +31,17 @@
     border: 1px solid var(--main-color);
 }
 
+.debited{
+    color:#50cb17;
+    white-space: nowrap;
+}
+
+.credited{
+    color: #b51212;
+    white-space: nowrap;
+}
+
+.notfound{
+    text-align: center;
+    margin: auto;
+}

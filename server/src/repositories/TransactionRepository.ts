@@ -24,7 +24,7 @@ export class TransactionRepository {
         try {
             const newTransaction = await TransactionModel.create({
                 data: {
-                    value: transactionData.value,
+                    value: Number(transactionData.value),
                     credited_account_id: transactionData.credited_account_id,
                     debited_account_id: transactionData.debited_account_id
                 },
@@ -48,7 +48,7 @@ export class TransactionRepository {
                 id: transactionData.id
             },
             data: {
-                value: transactionData.value,
+                value: Number(transactionData.value),
                 credited_account_id: transactionData.credited_account_id,
                 debited_account_id: transactionData.debited_account_id
             },

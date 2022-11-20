@@ -6,6 +6,7 @@ import { ReturnAPI } from "../resources/ReturnApi";
 import { CashOutService } from "../services/CashOutService";
 import moment from "moment";
 import { TrasactionRequests } from "../requests/TransactionRequest";
+import { UserVisibleData } from "../models/UserModel";
 
 interface WhereFilterInterface {
     createdAt: {
@@ -84,10 +85,38 @@ export class TransactionController {
 
         const transactions = await TransactionModel.findMany({
             where: whereFilter,
-            select: TransactionVisibleData
+            select: {
+                id: true,
+                value: true,
+                credited_accounts: {
+                    select: {
+                        id: true,
+                        balance: true,
+                        createdAt: true,
+                        updatedAt: true,
+                        user: {
+                            select: UserVisibleData
+                        }
+                    }
+                },
+                debited_accounts: {
+                    select: {
+                        id: true,
+                        balance: true,
+                        createdAt: true,
+                        updatedAt: true,
+                        user: {
+                            select: UserVisibleData
+                        }
+                    }
+                },
+                createdAt: true,
+                updatedAt: true,
+            }
+
         });
 
-        return ReturnAPI.messageReturn(res, { error: false, message: "transactions", developerMessage: "all transactions", data: transactions, statusHTTP: 200 })
+        return ReturnAPI.messageReturn(res, { error: false, message: "Transações encontradas", developerMessage: "all transactions", data: transactions, statusHTTP: 200 })
     }
 
 }

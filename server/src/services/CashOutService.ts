@@ -24,8 +24,8 @@ export class CashOutService {
         const cashOutOldBalance = cashOutAccount.balance;
         const cashInOldValue = cashInAccount.balance;
 
-        cashOutAccount.balance = cashOutAccount.balance - transactionData.value;
-        cashInAccount.balance = cashInAccount.balance + transactionData.value;
+        cashOutAccount.balance = Number(cashOutAccount.balance) - Number(transactionData.value);
+        cashInAccount.balance = Number(cashInAccount.balance) + Number(transactionData.value);
 
         const updateCashOutResponse = await AccountRepository.update(cashOutAccount);
 
