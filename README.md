@@ -1,6 +1,6 @@
 # ng_cash 
 
-Estruturar uma aplicação web fullstack, dockerizada, cujo objetivo seja possibilitar que usuários da NG consigam realizar transferências internas entre si.
+Desafio NG_Cash
 
 ## Desafio:
 
@@ -54,7 +54,7 @@ Estruturar uma aplicação web *fullstack*, ***dockerizada***, cujo objetivo sej
             - Mecanismo para filtrar a tabela por data de transação e/ou transações do tipo *cash-in*/*cash-out*;
             - Botão para realizar o *log-out.*
 - **Diagrama**
-- <img src="./digram.png" alt="diagrama">
+ <img src="./digram.png" alt="diagrama">
 
 ## diagrama
 
