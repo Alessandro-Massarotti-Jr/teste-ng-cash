@@ -2,6 +2,88 @@
 
 Desafio NG_Cash
 
+## config
+
+Executar `docker run --name ng_cash_db -e POSTGRES_PASSWORD=ng_cash_pass -e POSTGRES_USER=ng_cash_user -e POSTGRES_DB=ng_cash_db -p 5432:5432 -d postgres` para criar o container do banco de dados
+
+Executar `npm install` na pasta `./server` e `./client` para fazer o download das dependencias
+
+preencher as informação do arquivo `.env` das pastas `./server` e `./client` corretamente, seguindo os valores do arquivo `.env.example`
+
+Na pasta `./server` executar o comando `npm run migrate` para gerar as tabelas no banco de dados
+
+Nas pastas `./server` e `./client` o comando `npm run dev` inicializara o servidor de desenvolvimento
+
+Foi adicionado uma arquivo `insomnia.json` na raiz do projeto para fazer as inportações das rotas de API no [insomnia](https://insomnia.rest/download)
+
+
+## rotas de API
+
+### users
+
+#### GET {api_url}/users/auth-user
+
+ Retorna o usuario autenticado
+
+#### POST {api_url}/users
+
+ Cria um novo usuario no banco de dados
+
+Dados necessarios :
+{
+  "username":string,
+  "password":string
+}
+
+### accounts
+
+#### GET {api_url}/accounts
+
+Retorna a conta do usuario autenticado
+
+### transactions
+
+#### POST {api_url}/transaction
+
+Realiza a ação de cashOut
+
+Dados necessarios :
+{
+  "cashInUser":string,
+  "value":number
+}
+
+
+#### POST {api_url}/transaction/filter
+
+Busca as tranzação do usuario autenticado de acordo com os dados enviados
+
+Dados necessarios :
+{
+  "cashIn":boolean,
+  "cashOut":boolean,
+  "date_start":string,
+  "date_end":string
+}
+
+
+### auth
+
+#### GET {api_url}/auth/logout
+
+Realiza o logout do sistema
+
+#### POST {api_url}/auth/login
+
+Realiza o login do sistema
+
+Dados necessarios :
+{
+  "username":string,
+  "password":string
+}
+
+
 ## Desafio:
 
 Estruturar uma aplicação web *fullstack*, ***dockerizada***, cujo objetivo seja possibilitar que usuários da NG consigam realizar transferências internas entre si.
@@ -56,11 +138,5 @@ Estruturar uma aplicação web *fullstack*, ***dockerizada***, cujo objetivo sej
 - **Diagrama**
  <img src="./digram.png" alt="diagrama">
 
-## diagrama
 
-## config
-
-Run `docker run --name ng_cash_db -e POSTGRES_PASSWORD=ng_cash_pass -e POSTGRES_USER=ng_cash_user -e POSTGRES_DB=ng_cash_db -p 5432:5432 -d postgres` to setup postgres docker image
-
-Fill the `.env` file with correct Data
 
