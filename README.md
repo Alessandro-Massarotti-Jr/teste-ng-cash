@@ -1,7 +1,7 @@
 # ng_cash 
 
 <p>
-  <img src="https://img.shields.io/badge/made%20by-Alessandro%20Massarotti%20Jr-232323?style=flat-square">
+  <img src="https://img.shields.io/badge/made%20by-Alessandro%20Massarotti%20Jr-020202?style=flat-square">
   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/alessandro-massarotti-Jr/teste-ng-cash?color=020202&style=flat-square">
   <img alt="GitHub Top Language" src="https://img.shields.io/github/languages/top/alessandro-massarotti-Jr/teste-ng-cash?color=020202&style=flat-square">
 </p>
