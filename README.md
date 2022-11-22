@@ -1,6 +1,14 @@
 # ng_cash 
 
-Desafio NG_Cash
+<p>
+  <img src="https://img.shields.io/badge/made%20by-Alessandro%20Massarotti%20Jr-232323?style=flat-square">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/alessandro-massarotti-Jr/teste-ng-cash?color=020202&style=flat-square">
+  <img alt="GitHub Top Language" src="https://img.shields.io/github/languages/top/alessandro-massarotti-Jr/teste-ng-cash?color=020202&style=flat-square">
+</p>
+
+Desafio proposto pela equipe da NG_Cash
+
+<img src="./Desafio_Ng_cash.png" alt="Desafio Ng Cash">
 
 ## config
 
@@ -140,3 +148,8 @@ Estruturar uma aplicação web *fullstack*, ***dockerizada***, cujo objetivo sej
 
 
 
+<br>
+
+---
+
+Desenvolvido Por [Alessandro Massarotti Jr](https://github.com/alessandro-massarotti-jr) 🤖
